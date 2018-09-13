@@ -44,3 +44,45 @@ define :build_from_source, cmd: nil, url: nil do
   end
 end
 
+# based on
+#   https://github.com/k0kubun/dotfiles/blob/6256d5aa61099b5c14eb0371d7c7ec23dd13792e/cookbooks/functions/default.rb#L39-L54
+define :user_service, action: [] do
+  name = params[:name]
+
+  Array(params[:action]).each do |action|
+    case action
+    when :enable
+      execute "su - sei -c 'systemctl --user enable #{name}'" do
+        not_if "su - sei -c 'systemctl --user --quiet is-enabled #{name}'"
+      end
+    when :start
+      execute "su - sei -c 'systemctl --user start #{name}'" do
+        not_if "su - sei -c 'systemctl --user --quiet is-active #{name}'"
+      end
+    end
+  end
+end
+
+directory "/home/sei/src" do
+  owner "sei"
+  group "sei"
+end
+
+directory "/home/sei/src/github.com/" do
+  owner "sei"
+  group "sei"
+end
+
+define :github_repo do
+  name = params[:name]
+  username = name.split("/")[0]
+  directory "/home/sei/src/github.com/#{username}" do
+    owner "sei"
+    group "sei"
+  end
+
+  git "/home/sei/src/github.com/#{name}" do
+    repository "https://github.com/#{name}.git"
+    user "sei"
+  end
+end

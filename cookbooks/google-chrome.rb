@@ -8,7 +8,7 @@ execute "apt update" do
 end
 
 file "/etc/apt/sources.list.d/google-chrome.list" do
-  content "deb http://dl.google.com/linux/chrome/deb/ stable main\n"
+  content "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\n"
 end
 
 package "google-chrome-stable"

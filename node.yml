@@ -1,0 +1,9 @@
+rbenv:
+  user: sei
+  global: 2.5.1
+  versions:
+    - 2.5.1
+
+rbenv-default-gems:
+  default-gems:
+    - bundler

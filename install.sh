@@ -10,4 +10,4 @@ if [ ! -x bin/mitamae ]; then
   mv mitamae-x86_64-linux bin/mitamae
 fi
 
-bin/mitamae local $@ recipe.rb
+bin/mitamae local -y node.yml $@ recipe.rb

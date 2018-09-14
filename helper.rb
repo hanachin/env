@@ -52,12 +52,12 @@ define :user_service, action: [] do
   Array(params[:action]).each do |action|
     case action
     when :enable
-      execute "su - sei -c 'systemctl --user enable #{name}'" do
-        not_if "su - sei -c 'systemctl --user --quiet is-enabled #{name}'"
+      execute %(su -lc 'DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u sei)/bus" systemctl --user enable #{name}' sei) do
+        not_if %(su -lc 'DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u sei)/bus" systemctl --user --quiet is-enabled #{name}' sei)
       end
     when :start
-      execute "su - sei -c 'systemctl --user start #{name}'" do
-        not_if "su - sei -c 'systemctl --user --quiet is-active #{name}'"
+      execute %(su -lc 'DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u sei)/bus" systemctl --user start #{name}' sei) do
+        not_if %(su -lc 'DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u sei)/bus" systemctl --user --quiet is-active #{name}' sei)
       end
     end
   end

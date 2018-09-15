@@ -11,6 +11,7 @@ include_recipe "cookbooks/nodejs"
 include_recipe "cookbooks/peco"
 include_recipe "cookbooks/rcm"
 include_recipe "cookbooks/rust"
+include_recipe "cookbooks/rust-racer"
 include_recipe "cookbooks/alacritty" # depends on rust
 include_recipe "cookbooks/rails"
 include_recipe "cookbooks/sudo"

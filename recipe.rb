@@ -14,6 +14,7 @@ include_recipe "cookbooks/rust"
 include_recipe "cookbooks/rust-racer"
 include_recipe "cookbooks/alacritty" # depends on rust
 include_recipe "cookbooks/rails"
+include_recipe "cookbooks/satysfi"
 include_recipe "cookbooks/sudo"
 include_recipe "cookbooks/vscode"
 include_recipe "cookbooks/xremap"

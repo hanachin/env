@@ -61,3 +61,6 @@ execute "cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /home/sei/.opa
   user "sei"
   not_if "[ -f /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/ipaexg.ttf ]"
 end
+
+# for emacs
+github_repo "gfngfn/satysfi.el"

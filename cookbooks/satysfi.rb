@@ -1,9 +1,14 @@
 # setup opam
-package "opam"
 
-execute "opam init -a" do
+package "bubblewrap"
+
+execute "wget -O /usr/local/bin/opam https://github.com/ocaml/opam/releases/download/2.0.0/opam-2.0.0-x86_64-linux && chmod 755 /usr/local/bin/opam" do
+  not_if "[ -x /usr/local/bin/opam ]"
+end
+
+execute "opam init --auto-setup --comp 4.06.0" do
   user "sei"
-  not_if "[ -d ~/.opam ]"
+  not_if 'eval $(opam env) && [ -n "$(ocaml -version | grep 4.06.0)" ]'
 end
 
 # build dep
@@ -13,22 +18,17 @@ package "m4"
 package "unzip"
 package "wget"
 
-execute "opam switch 4.06.0 && eval `ocaml config env`" do
+execute 'eval "$(opam env)" && opam repository add satysfi-external https://github.com/gfngfn/satysfi-external-repo.git && opam update' do
   user "sei"
-  not_if '[ -n "$(ocaml -version | grep 4.06.0)" ]'
-end
-
-execute "opam repository add satysfi-external https://github.com/gfngfn/satysfi-external-repo.git && opam update" do
-  user "sei"
-  not_if '[ -n "$(opam repository list | grep satysfi)" ]'
+  not_if 'eval "$(opam env)" && [ -n "$(opam repository list | grep satysfi)" ]'
 end
 
 github_repo "gfngfn/SATySFi"
 
-execute "opam pin add satysfi . --yes && opam install satysfi --yes" do
+execute 'eval "$(opam env)" && opam pin add satysfi . --yes && opam install satysfi --yes' do
   user "sei"
   cwd "/home/sei/src/github.com/gfngfn/SATySFi"
-  not_if '[ -n "$(opam pin list | grep -i satysfi)" ]'
+  not_if '[ -n "$(opam list -i | grep SATySFi)" ]'
 end
 
 # work around for
@@ -41,25 +41,6 @@ end
 link "/home/sei/.satysfi/dist" do
   user "sei"
   to "/home/sei/.opam/4.06.0/share/satysfi/dist"
-end
-
-# Add some fonts
-package "fonts-ipaexfont"
-package "fonts-junicode"
-
-execute "cp /usr/share/fonts/truetype/junicode/Junicode.ttf /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/Junicode.ttf" do
-  user "sei"
-  not_if "[ -f /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/Junicode.ttf ]"
-end
-
-execute "cp /usr/share/fonts/opentype/ipaexfont-mincho/ipaexm.ttf /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/ipaexm.ttf" do
-  user "sei"
-  not_if "[ -f /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/ipaexm.ttf ]"
-end
-
-execute "cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/ipaexg.ttf" do
-  user "sei"
-  not_if "[ -f /home/sei/.opam/4.06.0/share/satysfi/dist/fonts/ipaexg.ttf ]"
 end
 
 # for emacs

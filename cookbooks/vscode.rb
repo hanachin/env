@@ -12,3 +12,4 @@ file "/etc/apt/sources.list.d/vscode.list" do
 end
 
 package "code"
+package "code-insiders"

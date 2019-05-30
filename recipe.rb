@@ -1,4 +1,5 @@
 include_recipe "helper"
+include_recipe "cookbooks/criu"
 include_recipe "cookbooks/docker"
 include_recipe "cookbooks/docker-compose"
 include_recipe "cookbooks/dotfiles"

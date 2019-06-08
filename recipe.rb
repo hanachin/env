@@ -37,6 +37,7 @@ package "mercurial"
 package "time"
 package "curl"
 package "tree"
+package "subversion"
 
 # rmagick
 package "libmagickwand-dev"

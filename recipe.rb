@@ -41,3 +41,8 @@ package "subversion"
 
 # rmagick
 package "libmagickwand-dev"
+
+# musl
+package "musl"
+package "musl-dev"
+package "musl-tools"

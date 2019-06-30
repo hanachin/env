@@ -46,3 +46,7 @@ package "libmagickwand-dev"
 package "musl"
 package "musl-dev"
 package "musl-tools"
+
+# os
+package "qemu"
+package "nasm"

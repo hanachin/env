@@ -1,3 +1,5 @@
+include_recipe "../helper"
+
 package "make"
 package "libreadline-dev"
 package "libsecret-1-dev"

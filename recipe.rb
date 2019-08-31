@@ -51,3 +51,4 @@ package "musl-tools"
 # os
 package "qemu"
 package "nasm"
+package "mtools"

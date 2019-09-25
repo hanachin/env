@@ -39,6 +39,7 @@ package "time"
 package "curl"
 package "tree"
 package "subversion"
+package "rsync"
 
 # rmagick
 package "libmagickwand-dev"

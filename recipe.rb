@@ -54,3 +54,6 @@ package "musl-tools"
 package "qemu"
 package "nasm"
 package "mtools"
+
+# misc
+package "hub"

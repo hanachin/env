@@ -55,5 +55,8 @@ package "qemu"
 package "nasm"
 package "mtools"
 
+# racc
+package "ragel"
+
 # misc
 package "hub"
